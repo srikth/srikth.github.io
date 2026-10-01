@@ -1350,3 +1350,127 @@ body {
         transition-duration: 0.01ms !important;
     }
 }
+
+/* =========================================================
+   FINAL SECTION SPACING FIX
+   EDUCATION / SKILLS / AWARDS / CONTACT
+========================================================= */
+
+#education,
+#skills,
+#awards,
+#contact {
+    display: block;
+    position: relative;
+    width: min(calc(100% - 48px), var(--max-width));
+    margin-left: auto;
+    margin-right: auto;
+    clear: both;
+    float: none;
+    min-height: 0;
+    height: auto;
+    overflow: visible;
+}
+
+/* Give every major section its own vertical space */
+#education {
+    margin-bottom: 0;
+    padding-top: 110px;
+    padding-bottom: 110px;
+}
+
+#skills {
+    margin-bottom: 0;
+    padding-top: 110px;
+    padding-bottom: 110px;
+}
+
+#awards {
+    margin-bottom: 0;
+    padding-top: 110px;
+    padding-bottom: 110px;
+}
+
+#contact {
+    margin-bottom: 0;
+    padding-top: 110px;
+    padding-bottom: 110px;
+}
+
+/* Prevent internal elements from escaping their sections */
+#education *,
+#skills *,
+#awards *,
+#contact * {
+    max-width: 100%;
+}
+
+/* Education */
+#education .education-list {
+    display: block;
+    width: 100%;
+    clear: both;
+}
+
+#education .education-content {
+    display: block;
+    width: 100%;
+    min-height: 0;
+    height: auto;
+    clear: both;
+}
+
+/* Skills */
+#skills .skills-grid {
+    display: grid;
+    width: 100%;
+    clear: both;
+}
+
+/* Awards */
+#awards .simple-list {
+    display: block;
+    width: 100%;
+    clear: both;
+}
+
+#awards .simple-list > div {
+    display: block;
+    width: 100%;
+    clear: both;
+}
+
+/* Contact */
+#contact .contact-content {
+    display: grid;
+    width: 100%;
+    clear: both;
+}
+
+/* =========================================================
+   MOBILE FIX
+========================================================= */
+
+@media (max-width: 850px) {
+
+    #education,
+    #skills,
+    #awards,
+    #contact {
+        width: min(calc(100% - 48px), var(--max-width));
+        padding-top: 80px;
+        padding-bottom: 80px;
+    }
+}
+
+@media (max-width: 550px) {
+
+    #education,
+    #skills,
+    #awards,
+    #contact {
+        width: calc(100% - 30px);
+        padding-top: 75px;
+        padding-bottom: 75px;
+    }
+}
