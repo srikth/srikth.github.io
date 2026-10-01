@@ -385,24 +385,26 @@ nav a.active {
 ========================= */
 
 .hero {
-
-    min-height:
-        calc(100vh - 76px);
+    min-height: calc(100vh - 76px);
 
     display: flex;
-
     align-items: center;
 
-    border-bottom:
-        1px solid var(--border);
+    border-bottom: 1px solid var(--border);
 }
 
 
 .hero-inner {
+    width: min(
+        calc(100% - 48px),
+        var(--max-width)
+    );
 
-    padding-top: 100px;
+    margin-left: auto;
+    margin-right: auto;
 
-    padding-bottom: 100px;
+    padding-top: 90px;
+    padding-bottom: 90px;
 
     display: grid;
 
@@ -420,40 +422,13 @@ nav a.active {
    HERO TEXT
 ========================= */
 
-.eyebrow {
-
-    color: var(--accent);
-
-    font-family:
-        "JetBrains Mono",
-        monospace;
-
-    font-size: 11px;
-
-    letter-spacing: 0.14em;
-
-    text-transform: uppercase;
-
-    margin-bottom: 26px;
-}
-
-
-.eyebrow::before {
-
-    content: "◆";
-
-    color: var(--gold);
-
-    margin-right: 10px;
-
-    font-size: 7px;
+.hero-text {
+    min-width: 0;
 }
 
 
 .hero h1 {
-
-    font-size:
-        clamp(58px, 9vw, 118px);
+    font-size: clamp(58px, 9vw, 118px);
 
     line-height: 0.92;
 
@@ -464,30 +439,21 @@ nav a.active {
 
 
 .hero h2 {
-
     margin-top: 30px;
 
-    font-family:
-        "JetBrains Mono",
-        monospace;
+    font-family: "JetBrains Mono", monospace;
 
     color: var(--accent);
 
-    font-size:
-        clamp(18px, 2vw, 25px);
+    font-size: clamp(18px, 2vw, 25px);
 
     font-weight: 500;
 
     letter-spacing: -0.02em;
-
-    text-shadow:
-        0 0 20px
-        rgba(0, 245, 200, 0.18);
 }
 
 
 .hero-description {
-
     max-width: 690px;
 
     margin-top: 28px;
@@ -506,9 +472,17 @@ nav a.active {
 
 .hero-photo {
 
+    width: 280px;
+
     justify-self: end;
 
-    width: 280px;
+    align-self: center;
+
+    display: block;
+
+    position: relative;
+
+    z-index: 2;
 }
 
 
@@ -524,8 +498,7 @@ nav a.active {
 
     filter: grayscale(100%);
 
-    border:
-        1px solid var(--border-bright);
+    border: 1px solid var(--border-bright);
 
     transition:
         filter 0.4s ease,
@@ -547,9 +520,7 @@ nav a.active {
 
     color: var(--light);
 
-    font-family:
-        "JetBrains Mono",
-        monospace;
+    font-family: "JetBrains Mono", monospace;
 
     font-size: 8px;
 
@@ -557,7 +528,6 @@ nav a.active {
 
     text-align: right;
 }
-
 
 /* =========================
    HERO LINKS
