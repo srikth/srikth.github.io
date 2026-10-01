@@ -1,29 +1,20 @@
-/* =========================================================
-   SRIKANTH SHANMUGAM
-   CYBERPUNK RESEARCH PORTFOLIO
-   ========================================================= */
+/* =========================
+   FOOTER YEAR
+========================= */
 
-
-/* ================= CURRENT YEAR ================= */
-
-const yearElement =
-    document.getElementById("year");
+const yearElement = document.getElementById("year");
 
 if (yearElement) {
-
-    yearElement.textContent =
-        new Date().getFullYear();
-
+    yearElement.textContent = new Date().getFullYear();
 }
 
 
-/* ================= ACTIVE NAVIGATION ================= */
+/* =========================
+   ACTIVE NAVIGATION
+========================= */
 
-const sections =
-    document.querySelectorAll("section[id]");
-
-const navLinks =
-    document.querySelectorAll("nav a");
+const sections = document.querySelectorAll("section[id]");
+const navLinks = document.querySelectorAll("nav a");
 
 
 function updateActiveNavigation() {
@@ -33,13 +24,10 @@ function updateActiveNavigation() {
     sections.forEach((section) => {
 
         const sectionTop =
-            section.offsetTop - 140;
+            section.offsetTop - 160;
 
         if (window.scrollY >= sectionTop) {
-
-            currentSection =
-                section.getAttribute("id");
-
+            currentSection = section.getAttribute("id");
         }
 
     });
@@ -49,13 +37,10 @@ function updateActiveNavigation() {
 
         link.classList.remove("active");
 
-        const href =
-            link.getAttribute("href");
+        const href = link.getAttribute("href");
 
         if (href === `#${currentSection}`) {
-
             link.classList.add("active");
-
         }
 
     });
@@ -70,139 +55,118 @@ window.addEventListener(
 );
 
 
-/* ================= SMOOTH NAVIGATION ================= */
+/* =========================
+   SMOOTH NAVIGATION
+========================= */
 
 navLinks.forEach((link) => {
 
-    link.addEventListener(
-        "click",
-        (event) => {
+    link.addEventListener("click", (event) => {
 
-            const targetID =
-                link.getAttribute("href");
+        const targetID =
+            link.getAttribute("href");
 
-            if (
-                !targetID ||
-                !targetID.startsWith("#")
-            ) {
-
-                return;
-
-            }
-
-
-            const target =
-                document.querySelector(targetID);
-
-
-            if (!target) {
-
-                return;
-
-            }
-
-
-            event.preventDefault();
-
-
-            target.scrollIntoView({
-
-                behavior: "smooth",
-
-                block: "start"
-
-            });
-
+        if (
+            !targetID ||
+            !targetID.startsWith("#")
+        ) {
+            return;
         }
-    );
+
+
+        const target =
+            document.querySelector(targetID);
+
+        if (!target) {
+            return;
+        }
+
+
+        event.preventDefault();
+
+
+        target.scrollIntoView({
+            behavior: "smooth",
+            block: "start"
+        });
+
+    });
 
 });
 
 
-/* ================= PROJECT LINKS ================= */
+/* =========================
+   PROJECT LINKS
+========================= */
 
 const projectLinks =
-    document.querySelectorAll(
-        ".project-link"
-    );
+    document.querySelectorAll(".project-link");
 
 
 projectLinks.forEach((link) => {
 
-    link.addEventListener(
-        "click",
-        () => {
+    link.addEventListener("click", () => {
 
-            console.log(
-                "Opening project:",
-                link.href
-            );
+        console.log(
+            "Opening project:",
+            link.href
+        );
 
-        }
-    );
+    });
 
 });
 
 
-/* ================= PAGE LOAD ================= */
+/* =========================
+   PAGE LOADING
+========================= */
 
 document.documentElement.classList.add(
     "page-loading"
 );
 
 
-window.addEventListener(
-    "load",
-    () => {
+window.addEventListener("load", () => {
 
-        document.documentElement.classList.remove(
-            "page-loading"
-        );
+    document.documentElement.classList.remove(
+        "page-loading"
+    );
 
-    }
-);
+});
 
 
-/* ================= SECTION REVEAL ================= */
+/* =========================
+   SCROLL REVEAL
+========================= */
 
 const revealItems =
     document.querySelectorAll(
-        ".research-item, " +
-        ".timeline-item, " +
-        ".project, " +
-        ".skill-group, " +
-        ".simple-list li"
+        ".research-item, .timeline-item, .project, .skill-group, .simple-list > div"
     );
 
 
 if ("IntersectionObserver" in window) {
-
 
     const observer =
         new IntersectionObserver(
 
             (entries) => {
 
-                entries.forEach(
-                    (entry) => {
+                entries.forEach((entry) => {
 
-                        if (
-                            entry.isIntersecting
-                        ) {
+                    if (entry.isIntersecting) {
 
-                            entry.target.classList.add(
-                                "cyber-visible"
-                            );
+                        entry.target.classList.add(
+                            "cyber-visible"
+                        );
 
-
-                            observer.unobserve(
-                                entry.target
-                            );
-
-                        }
+                        observer.unobserve(
+                            entry.target
+                        );
 
                     }
-                );
+
+                });
 
             },
 
@@ -226,6 +190,8 @@ if ("IntersectionObserver" in window) {
 }
 
 
-/* ================= INITIAL STATE ================= */
+/* =========================
+   INITIAL NAVIGATION STATE
+========================= */
 
 updateActiveNavigation();
