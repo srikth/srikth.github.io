@@ -1621,4 +1621,84 @@ footer {
     }
 }
 
+/* =========================
+   FIX: LOWER SECTIONS
+========================= */
 
+#education,
+#skills,
+#awards,
+#contact {
+    position: relative;
+    display: block;
+    clear: both;
+}
+
+#education {
+    margin-top: 80px;
+}
+
+#skills {
+    margin-top: 80px;
+}
+
+#awards {
+    margin-top: 80px;
+}
+
+#contact {
+    margin-top: 80px;
+}
+
+/* Prevent content from collapsing into the next section */
+
+#education .section-content,
+#skills .section-content,
+#awards .section-content,
+#contact .section-content {
+    position: relative;
+    width: 100%;
+}
+
+/* Education logo layout */
+
+.education-details {
+    display: flex;
+    align-items: flex-start;
+    gap: 20px;
+}
+
+/* Experience logo layout */
+
+.experience-details {
+    display: flex;
+    align-items: flex-start;
+    gap: 20px;
+}
+
+/* Keep logos from affecting section height */
+
+.education-logo,
+.experience-logo {
+    width: 52px;
+    height: 52px;
+    object-fit: contain;
+    flex-shrink: 0;
+}
+
+/* Mobile */
+
+@media (max-width: 700px) {
+
+    #education,
+    #skills,
+    #awards,
+    #contact {
+        margin-top: 60px;
+    }
+
+    .education-details,
+    .experience-details {
+        flex-direction: row;
+    }
+}
