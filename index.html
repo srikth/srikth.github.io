@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <html lang="en" data-theme="light">
-   
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -25,23 +25,6 @@
 
 <body>
 
-<!-- =========================
-     BACKGROUND EFFECTS
-========================= -->
-<button
-    id="themeToggle"
-    class="theme-toggle"
-    type="button"
-    aria-label="Switch to dark theme"
-    title="Switch theme"
->
-    <span id="themeIcon">☾</span>
-</button>
-
-<!-- =========================
-     NAVIGATION
-========================= -->
-
 <header class="navbar">
 
     <a href="#home" class="nav-brand">
@@ -64,10 +47,11 @@
         class="theme-toggle"
         id="themeToggle"
         type="button"
-        aria-label="Toggle theme"
-        title="Toggle theme"
+        aria-label="Switch to dark theme"
+        title="Switch to technical dark theme"
     >
-        <span id="themeIcon">☀</span>
+        <span id="themeIcon">☾</span>
+        <span id="themeText">DARK</span>
     </button>
 
 </header>
@@ -75,9 +59,9 @@
 
 <main>
 
-<!-- =========================
+<!-- =========================================================
      HOME
-========================= -->
+========================================================= -->
 
 <section id="home" class="hero section">
 
@@ -91,8 +75,7 @@
         <p class="eyebrow">ACADEMIC PORTFOLIO</p>
 
         <h1>
-            Srikanth
-            <span>Shanmugam</span>
+            Srikanth <span>Shanmugam</span>
         </h1>
 
         <p class="hero-description">
@@ -111,8 +94,7 @@
 
         <div class="hero-actions">
             <a href="#research" class="btn btn-primary">
-                Explore Research
-                <span>↗</span>
+                Explore Research <span>↗</span>
             </a>
 
             <a href="#contact" class="btn btn-secondary">
@@ -121,6 +103,7 @@
         </div>
 
         <div class="hero-meta">
+
             <div>
                 <span class="meta-label">FOCUS</span>
                 <span>AI / ML / QIS</span>
@@ -135,6 +118,7 @@
                 <span class="meta-label">LOCATION</span>
                 <span>India</span>
             </div>
+
         </div>
 
     </div>
@@ -162,20 +146,28 @@
 </section>
 
 
-<!-- =========================
+<!-- =========================================================
      ABOUT
-========================= -->
+========================================================= -->
 
 <section id="about" class="section">
 
     <div class="section-heading reveal">
+
         <p class="eyebrow">ABOUT</p>
-        <h2>Engineering systems at the intersection of intelligence and physics.</h2>
+
+        <h2>
+            Engineering systems at the intersection
+            of intelligence and physics.
+        </h2>
+
     </div>
+
 
     <div class="about-grid">
 
         <div class="about-text reveal">
+
             <p>
                 I am an Electronics & Instrumentation Engineering graduate
                 with an interdisciplinary interest in artificial intelligence,
@@ -186,10 +178,10 @@
             <p>
                 My engineering background introduced me to sensors,
                 instrumentation, data acquisition, signal processing,
-                embedded systems, and automation. I have increasingly extended
-                that foundation toward computational research involving
-                machine learning, computer vision, quantum computing,
-                and scientific data.
+                embedded systems, and automation. I have increasingly
+                extended that foundation toward computational research
+                involving machine learning, computer vision, quantum
+                computing, and scientific data.
             </p>
 
             <p>
@@ -197,32 +189,45 @@
                 AI and computational methods can be combined with physical,
                 biological, astronomical, or quantum systems.
             </p>
+
         </div>
+
 
         <div class="about-facts reveal">
 
             <div class="fact-card interactive-card">
                 <span>01</span>
                 <strong>AI / ML</strong>
-                <p>Deep learning, computer vision, scientific AI</p>
+                <p>
+                    Deep learning, computer vision,
+                    scientific AI
+                </p>
             </div>
 
             <div class="fact-card interactive-card">
                 <span>02</span>
                 <strong>Quantum</strong>
-                <p>QIS, QML, QEC and quantum noise</p>
+                <p>
+                    QIS, QML, QEC and quantum noise
+                </p>
             </div>
 
             <div class="fact-card interactive-card">
                 <span>03</span>
                 <strong>Scientific Computing</strong>
-                <p>Computational approaches to scientific problems</p>
+                <p>
+                    Computational approaches to
+                    scientific problems
+                </p>
             </div>
 
             <div class="fact-card interactive-card">
                 <span>04</span>
                 <strong>Intelligent Sensing</strong>
-                <p>IoT, embedded systems and sensing applications</p>
+                <p>
+                    IoT, embedded systems and
+                    sensing applications
+                </p>
             </div>
 
         </div>
@@ -232,109 +237,173 @@
 </section>
 
 
-<!-- =========================
+<!-- =========================================================
      RESEARCH
-========================= -->
+     DARK MODE IMAGE ONLY
+========================================================= -->
 
-<section id="research" class="section research-section image-section">
-    <img class="section-bg quantum-section-bg" src="quantum.png" alt="">
-    <img class="section-bg galaxy-section-bg" src="galaxy.png" alt="">
+<section
+    id="research"
+    class="section research-section image-section"
+>
+
+    <img
+        class="section-bg quantum-section-bg"
+        src="quantum.png"
+        alt=""
+        aria-hidden="true"
+    >
+
+    <img
+        class="section-bg galaxy-section-bg"
+        src="galaxy.png"
+        alt=""
+        aria-hidden="true"
+    >
+
 
     <div class="section-heading reveal">
+
         <p class="eyebrow">RESEARCH INTERESTS</p>
-        <h2>Exploring intelligent systems across disciplines.</h2>
+
+        <h2>
+            Exploring intelligent systems
+            across disciplines.
+        </h2>
+
     </div>
+
 
     <div class="research-grid">
 
         <article class="research-card interactive-card reveal">
+
             <div class="research-icon">AI</div>
+
             <h3>Artificial Intelligence & ML</h3>
+
             <p>
-                Deep learning, self-supervised learning, reinforcement
-                learning, multimodal AI, generative models and
-                physics-informed machine learning.
+                Deep learning, self-supervised learning,
+                reinforcement learning, multimodal AI,
+                generative models and physics-informed
+                machine learning.
             </p>
+
             <div class="tags">
                 <span>SSL</span>
                 <span>DRL</span>
                 <span>GANs</span>
                 <span>GNNs</span>
             </div>
+
         </article>
 
+
         <article class="research-card interactive-card reveal">
+
             <div class="research-icon">CV</div>
+
             <h3>Computer Vision</h3>
+
             <p>
-                Visual learning for scientific, astronomical,
-                ecological and real-world sensing applications.
+                Visual learning for scientific,
+                astronomical, ecological and real-world
+                sensing applications.
             </p>
+
             <div class="tags">
                 <span>CNN</span>
                 <span>OpenCV</span>
                 <span>Vision</span>
                 <span>Grad-CAM</span>
             </div>
+
         </article>
 
+
         <article class="research-card interactive-card reveal">
+
             <div class="research-icon">Q</div>
+
             <h3>Quantum Information Science</h3>
+
             <p>
                 Quantum error correction, quantum noise,
                 Kraus operators, quantum machine learning,
                 simulation and quantum communication.
             </p>
+
             <div class="tags">
                 <span>QEC</span>
                 <span>QML</span>
                 <span>Qiskit</span>
                 <span>Cirq</span>
             </div>
+
         </article>
 
+
         <article class="research-card interactive-card reveal">
+
             <div class="research-icon">SC</div>
+
             <h3>Scientific Computing</h3>
+
             <p>
-                Computational approaches for physics, astronomy,
-                biology, environmental systems and complex scientific data.
+                Computational approaches for physics,
+                astronomy, biology, environmental systems
+                and complex scientific data.
             </p>
+
             <div class="tags">
                 <span>Simulation</span>
                 <span>Physics</span>
                 <span>Data</span>
             </div>
+
         </article>
 
+
         <article class="research-card interactive-card reveal">
+
             <div class="research-icon">IoT</div>
+
             <h3>Intelligent Sensing</h3>
+
             <p>
                 IoT, edge intelligence, embedded systems,
-                sensor data processing and intelligent communication systems.
+                sensor data processing and intelligent
+                communication systems.
             </p>
+
             <div class="tags">
                 <span>IoT</span>
                 <span>Edge AI</span>
                 <span>ESP32</span>
             </div>
+
         </article>
 
+
         <article class="research-card interactive-card reveal">
+
             <div class="research-icon">N</div>
+
             <h3>Emerging AI Systems</h3>
+
             <p>
-                Neural machine translation, SLAM, geometric deep learning,
-                neuro-symbolic systems, TinyML and modern generative AI.
+                Neural machine translation, SLAM,
+                geometric deep learning, neuro-symbolic
+                systems, TinyML and modern generative AI.
             </p>
+
             <div class="tags">
                 <span>NMT</span>
                 <span>SLAM</span>
                 <span>TinyML</span>
                 <span>GenAI</span>
             </div>
+
         </article>
 
     </div>
@@ -342,31 +411,46 @@
 </section>
 
 
-<!-- =========================
+<!-- =========================================================
      EXPERIENCE
-========================= -->
+     NO SCIENTIFIC IMAGE
+========================================================= -->
 
-<section id="education" class="section image-section">
-    <img class="section-bg satellite-section-bg" src="satelite.png" alt="">
+<section id="experience" class="section">
 
     <div class="section-heading reveal">
+
         <p class="eyebrow">EXPERIENCE</p>
-        <h2>Leadership, coordination and academic engagement.</h2>
+
+        <h2>
+            Leadership, coordination and
+            academic engagement.
+        </h2>
+
     </div>
+
 
     <div class="timeline">
 
         <article class="timeline-item reveal">
 
             <div class="timeline-logo">
-                <img src="srm logo.jpg" alt="SRM Institute of Science and Technology">
+                <img
+                    src="srm logo.jpg"
+                    alt="SRM Institute of Science and Technology"
+                >
             </div>
 
             <div class="timeline-content interactive-card">
 
                 <div class="timeline-top">
-                    <span class="timeline-date">2024 — 2026</span>
-                    <span class="timeline-type">LEADERSHIP</span>
+                    <span class="timeline-date">
+                        2024 — 2026
+                    </span>
+
+                    <span class="timeline-type">
+                        LEADERSHIP
+                    </span>
                 </div>
 
                 <h3>Class Representative</h3>
@@ -376,15 +460,25 @@
                 </h4>
 
                 <p>
-                    Represented approximately 35 students while coordinating
-                    communication between students, faculty and department
-                    administration.
+                    Represented approximately 35 students while
+                    coordinating communication between students,
+                    faculty and department administration.
                 </p>
 
                 <ul>
-                    <li>Coordinated academic communication and student concerns.</li>
-                    <li>Supported faculty-student coordination.</li>
-                    <li>Helped organize departmental academic activities.</li>
+                    <li>
+                        Coordinated academic communication
+                        and student concerns.
+                    </li>
+
+                    <li>
+                        Supported faculty-student coordination.
+                    </li>
+
+                    <li>
+                        Helped organize departmental
+                        academic activities.
+                    </li>
                 </ul>
 
             </div>
@@ -395,31 +489,53 @@
         <article class="timeline-item reveal">
 
             <div class="timeline-logo">
-                <img src="srm logo.jpg" alt="SRM Institute of Science and Technology">
+                <img
+                    src="srm logo.jpg"
+                    alt="SRM Institute of Science and Technology"
+                >
             </div>
 
             <div class="timeline-content interactive-card">
 
                 <div class="timeline-top">
-                    <span class="timeline-date">2024 — 2026</span>
-                    <span class="timeline-type">TECHNICAL EVENT</span>
+                    <span class="timeline-date">
+                        2024 — 2026
+                    </span>
+
+                    <span class="timeline-type">
+                        TECHNICAL EVENT
+                    </span>
                 </div>
 
-                <h3>Department Expo & Technical Coordination</h3>
+                <h3>
+                    Department Expo & Technical Coordination
+                </h3>
 
                 <h4>
                     SRM Institute of Science and Technology
                 </h4>
 
                 <p>
-                    Contributed to departmental technical activities and
-                    coordination involving more than 50 students.
+                    Contributed to departmental technical
+                    activities and coordination involving
+                    more than 50 students.
                 </p>
 
                 <ul>
-                    <li>Supported event planning and coordination.</li>
-                    <li>Worked with students on technical demonstrations.</li>
-                    <li>Helped communicate requirements between teams and faculty.</li>
+                    <li>
+                        Supported event planning
+                        and coordination.
+                    </li>
+
+                    <li>
+                        Worked with students on
+                        technical demonstrations.
+                    </li>
+
+                    <li>
+                        Helped communicate requirements
+                        between teams and faculty.
+                    </li>
                 </ul>
 
             </div>
@@ -431,33 +547,46 @@
 </section>
 
 
-<!-- =========================
+<!-- =========================================================
      PROJECTS
-========================= -->
+========================================================= -->
 
 <section id="projects" class="section projects-section">
 
     <div class="section-heading reveal">
+
         <p class="eyebrow">SELECTED PROJECTS</p>
-        <h2>From quantum communication to scientific vision.</h2>
+
+        <h2>
+            From quantum communication
+            to scientific vision.
+        </h2>
+
     </div>
+
 
     <div class="projects-grid">
 
         <article class="project-card featured-project interactive-card reveal">
+
             <div class="project-number">01</div>
 
             <div class="project-content">
-                <span class="project-category">QUANTUM COMMUNICATION</span>
+
+                <span class="project-category">
+                    QUANTUM COMMUNICATION
+                </span>
 
                 <h3>
-                    Quantum Error Correction for Deep Space Communication
+                    Quantum Error Correction
+                    for Deep Space Communication
                 </h3>
 
                 <p>
-                    Explored 3-qubit and 7-qubit quantum error-correction
-                    approaches for mitigating noise and decoherence in
-                    deep-space communication scenarios.
+                    Explored 3-qubit and 7-qubit
+                    quantum error-correction approaches
+                    for mitigating noise and decoherence
+                    in deep-space communication scenarios.
                 </p>
 
                 <div class="tags">
@@ -475,22 +604,30 @@
                 >
                     View Project ↗
                 </a>
+
             </div>
+
         </article>
 
 
         <article class="project-card interactive-card reveal">
+
             <div class="project-number">02</div>
 
             <div class="project-content">
-                <span class="project-category">QUANTUM MACHINE LEARNING</span>
 
-                <h3>Quantum Noise Parameter Learning</h3>
+                <span class="project-category">
+                    QUANTUM MACHINE LEARNING
+                </span>
+
+                <h3>
+                    Quantum Noise Parameter Learning
+                </h3>
 
                 <p>
-                    Investigated quantum noise using Kraus operators,
-                    density matrices and neural-network-based parameter
-                    learning.
+                    Investigated quantum noise using
+                    Kraus operators, density matrices
+                    and neural-network-based parameter learning.
                 </p>
 
                 <div class="tags">
@@ -498,21 +635,30 @@
                     <span>PyTorch</span>
                     <span>Kraus</span>
                 </div>
+
             </div>
+
         </article>
 
 
         <article class="project-card interactive-card reveal">
+
             <div class="project-number">03</div>
 
             <div class="project-content">
-                <span class="project-category">ASTRONOMICAL AI</span>
 
-                <h3>CNN Galaxy Morphology Classification</h3>
+                <span class="project-category">
+                    ASTRONOMICAL AI
+                </span>
+
+                <h3>
+                    CNN Galaxy Morphology Classification
+                </h3>
 
                 <p>
-                    Applied convolutional neural networks to classify
-                    astronomical galaxy morphology from image data.
+                    Applied convolutional neural networks
+                    to classify astronomical galaxy morphology
+                    from image data.
                 </p>
 
                 <div class="tags">
@@ -520,21 +666,30 @@
                     <span>CNN</span>
                     <span>Computer Vision</span>
                 </div>
+
             </div>
+
         </article>
 
 
         <article class="project-card interactive-card reveal">
+
             <div class="project-number">04</div>
 
             <div class="project-content">
-                <span class="project-category">BIOINFORMATICS</span>
 
-                <h3>Protein Structure Prediction</h3>
+                <span class="project-category">
+                    BIOINFORMATICS
+                </span>
+
+                <h3>
+                    Protein Structure Prediction
+                </h3>
 
                 <p>
-                    Explored deep learning approaches for protein
-                    structure-related prediction using biological sequence data.
+                    Explored deep learning approaches
+                    for protein structure-related prediction
+                    using biological sequence data.
                 </p>
 
                 <div class="tags">
@@ -542,22 +697,30 @@
                     <span>Python</span>
                     <span>CB513</span>
                 </div>
+
             </div>
+
         </article>
 
 
         <article class="project-card interactive-card reveal">
+
             <div class="project-number">05</div>
 
             <div class="project-content">
-                <span class="project-category">ECOLOGICAL AI</span>
 
-                <h3>Species Distribution Modeling</h3>
+                <span class="project-category">
+                    ECOLOGICAL AI
+                </span>
+
+                <h3>
+                    Species Distribution Modeling
+                </h3>
 
                 <p>
-                    Investigated machine-learning approaches for modeling
-                    species distributions using environmental and geographic
-                    variables.
+                    Investigated machine-learning approaches
+                    for modeling species distributions using
+                    environmental and geographic variables.
                 </p>
 
                 <div class="tags">
@@ -565,21 +728,30 @@
                     <span>Ecology</span>
                     <span>Data Science</span>
                 </div>
+
             </div>
+
         </article>
 
 
         <article class="project-card interactive-card reveal">
+
             <div class="project-number">06</div>
 
             <div class="project-content">
-                <span class="project-category">COMPUTER VISION</span>
 
-                <h3>FER2013 Emotion Classification</h3>
+                <span class="project-category">
+                    COMPUTER VISION
+                </span>
+
+                <h3>
+                    FER2013 Emotion Classification
+                </h3>
 
                 <p>
-                    Developed a CNN-based facial emotion recognition model
-                    and used Grad-CAM for visual interpretation.
+                    Developed a CNN-based facial emotion
+                    recognition model and used Grad-CAM
+                    for visual interpretation.
                 </p>
 
                 <div class="tags">
@@ -587,21 +759,30 @@
                     <span>OpenCV</span>
                     <span>Grad-CAM</span>
                 </div>
+
             </div>
+
         </article>
 
 
         <article class="project-card interactive-card reveal">
+
             <div class="project-number">07</div>
 
             <div class="project-content">
-                <span class="project-category">IOT / EMBEDDED</span>
 
-                <h3>Smart Weather Station</h3>
+                <span class="project-category">
+                    IOT / EMBEDDED
+                </span>
+
+                <h3>
+                    Smart Weather Station
+                </h3>
 
                 <p>
-                    Built an ESP32-based environmental monitoring system
-                    with sensor acquisition and cloud-connected visualization.
+                    Built an ESP32-based environmental
+                    monitoring system with sensor acquisition
+                    and cloud-connected visualization.
                 </p>
 
                 <div class="tags">
@@ -609,21 +790,30 @@
                     <span>Blynk</span>
                     <span>Sensors</span>
                 </div>
+
             </div>
+
         </article>
 
 
         <article class="project-card interactive-card reveal">
+
             <div class="project-number">08</div>
 
             <div class="project-content">
-                <span class="project-category">INTELLIGENT SYSTEMS</span>
 
-                <h3>AI Radar Control</h3>
+                <span class="project-category">
+                    INTELLIGENT SYSTEMS
+                </span>
+
+                <h3>
+                    AI Radar Control
+                </h3>
 
                 <p>
-                    Explored intelligent sensing and automated radar-control
-                    concepts using embedded and AI-based approaches.
+                    Explored intelligent sensing and
+                    automated radar-control concepts using
+                    embedded and AI-based approaches.
                 </p>
 
                 <div class="tags">
@@ -631,7 +821,9 @@
                     <span>Radar</span>
                     <span>Embedded</span>
                 </div>
+
             </div>
+
         </article>
 
     </div>
@@ -639,22 +831,47 @@
 </section>
 
 
-<!-- =========================
+<!-- =========================================================
      EDUCATION
-========================= -->
+     SATELLITE IMAGE DARK MODE ONLY
+========================================================= -->
 
-<section id="education" class="section">
+<section
+    id="education"
+    class="section image-section"
+>
+
+    <img
+        class="section-bg satellite-section-bg"
+        src="satelite.png"
+        alt=""
+        aria-hidden="true"
+    >
+
 
     <div class="section-heading reveal">
+
         <p class="eyebrow">EDUCATION</p>
-        <h2>Engineering foundation with interdisciplinary research interests.</h2>
+
+        <h2>
+            Engineering foundation with
+            interdisciplinary research interests.
+        </h2>
+
     </div>
+
 
     <div class="education-card interactive-card reveal">
 
         <div class="education-logo">
-            <img src="srm logo.jpg" alt="SRM Institute of Science and Technology">
+
+            <img
+                src="srm logo.jpg"
+                alt="SRM Institute of Science and Technology"
+            >
+
         </div>
+
 
         <div class="education-details">
 
@@ -665,7 +882,8 @@
                 </span>
 
                 <h3>
-                    B.Tech. Electronics & Instrumentation Engineering
+                    B.Tech. Electronics &
+                    Instrumentation Engineering
                 </h3>
 
                 <h4>
@@ -676,8 +894,12 @@
                     Kattankulathur, Tamil Nadu, India
                 </p>
 
+
                 <div class="coursework">
-                    <strong>Relevant Coursework</strong>
+
+                    <strong>
+                        Relevant Coursework
+                    </strong>
 
                     <div class="tags">
                         <span>Artificial Intelligence</span>
@@ -686,14 +908,24 @@
                         <span>Image Processing</span>
                         <span>Physics</span>
                     </div>
+
                 </div>
 
             </div>
 
+
             <div class="education-result">
+
                 <span>GPA</span>
-                <strong>7.70 / 10</strong>
-                <small>Dean's Scholarship Recipient</small>
+
+                <strong>
+                    7.70 / 10
+                </strong>
+
+                <small>
+                    Dean's Scholarship Recipient
+                </small>
+
             </div>
 
         </div>
@@ -703,16 +935,22 @@
 </section>
 
 
-<!-- =========================
+<!-- =========================================================
      SKILLS
-========================= -->
+========================================================= -->
 
 <section id="skills" class="section">
 
     <div class="section-heading reveal">
+
         <p class="eyebrow">SKILLS</p>
-        <h2>Technical toolkit.</h2>
+
+        <h2>
+            Technical toolkit.
+        </h2>
+
     </div>
+
 
     <div class="skills-grid">
 
@@ -726,7 +964,8 @@
             <span class="skill-index">02</span>
             <h3>AI / Machine Learning</h3>
             <p>
-                TensorFlow · PyTorch · scikit-learn · CNNs · Deep Learning
+                TensorFlow · PyTorch · scikit-learn
+                · CNNs · Deep Learning
             </p>
         </div>
 
@@ -742,7 +981,8 @@
             <span class="skill-index">04</span>
             <h3>Computer Vision</h3>
             <p>
-                OpenCV · Image Processing · Grad-CAM · Visual Learning
+                OpenCV · Image Processing · Grad-CAM
+                · Visual Learning
             </p>
         </div>
 
@@ -750,7 +990,8 @@
             <span class="skill-index">05</span>
             <h3>Quantum Computing</h3>
             <p>
-                Qiskit · Cirq · PennyLane · QEC · Kraus Operators · Quantum Noise
+                Qiskit · Cirq · PennyLane · QEC
+                · Kraus Operators · Quantum Noise
             </p>
         </div>
 
@@ -767,41 +1008,76 @@
 </section>
 
 
-<!-- =========================
+<!-- =========================================================
      AWARDS
-========================= -->
+     ANTENNA IMAGE DARK MODE ONLY
+========================================================= -->
 
-<section id="awards" class="section image-section">
-    <img class="section-bg antenna-section-bg" src="antenna.png" alt="">
+<section
+    id="awards"
+    class="section image-section"
+>
+
+    <img
+        class="section-bg antenna-section-bg"
+        src="antenna.png"
+        alt=""
+        aria-hidden="true"
+    >
+
 
     <div class="section-heading reveal">
-        <p class="eyebrow">AWARDS & RECOGNITION</p>
-        <h2>Academic recognition.</h2>
+
+        <p class="eyebrow">
+            AWARDS & RECOGNITION
+        </p>
+
+        <h2>
+            Academic recognition.
+        </h2>
+
     </div>
+
 
     <div class="awards-grid">
 
         <div class="award-card interactive-card reveal">
+
             <div class="award-symbol">◆</div>
+
             <div>
                 <span>ACADEMIC</span>
-                <h3>Dean's Scholarship Recipient</h3>
+
+                <h3>
+                    Dean's Scholarship Recipient
+                </h3>
+
                 <p>
-                    Academic scholarship recognition during undergraduate study.
+                    Academic scholarship recognition
+                    during undergraduate study.
                 </p>
             </div>
+
         </div>
 
+
         <div class="award-card interactive-card reveal">
+
             <div class="award-symbol">◆</div>
+
             <div>
                 <span>LEADERSHIP</span>
-                <h3>Student Representation</h3>
+
+                <h3>
+                    Student Representation
+                </h3>
+
                 <p>
-                    Served as class representative and supported
-                    student-faculty coordination.
+                    Served as class representative and
+                    supported student-faculty coordination.
                 </p>
             </div>
+
         </div>
 
     </div>
@@ -809,9 +1085,9 @@
 </section>
 
 
-<!-- =========================
+<!-- =========================================================
      CONTACT
-========================= -->
+========================================================= -->
 
 <section id="contact" class="section contact-section">
 
@@ -832,12 +1108,15 @@
             </h2>
 
             <p>
-                Interested in AI, quantum information, scientific computing,
-                intelligent sensing, or interdisciplinary research?
+                Interested in AI, quantum information,
+                scientific computing, intelligent sensing,
+                or interdisciplinary research?
             </p>
+
 
             <div class="contact-actions">
 
+                <!-- Replace the placeholder email with your actual email -->
                 <a
                     href="mailto:your-email@example.com"
                     class="contact-main-button"
@@ -872,9 +1151,8 @@
 
 </section>
 
-<!-- =========================
-     FOOTER
-========================= -->
+</main>
+
 
 <footer class="footer">
 
