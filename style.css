@@ -732,160 +732,62 @@ img {
 
 
 /* =========================================================
-   SCIENTIFIC IMAGES
-   DARK MODE ONLY
+   SCIENTIFIC IMAGES — DARK THEME ONLY
 ========================================================= */
 
-.image-section {
+.section.image-section {
     position: relative;
-    isolation: isolate;
     overflow: hidden;
-}
-
-.image-section > *:not(.section-bg) {
-    position: relative;
-    z-index: 2;
 }
 
 .section-bg {
     position: absolute;
-
-    z-index: 0;
-
-    pointer-events: none;
-    user-select: none;
-
+    inset: 0;
+    width: 100%;
+    height: 100%;
     object-fit: cover;
-
+    pointer-events: none;
+    z-index: 0;
     opacity: 0;
     visibility: hidden;
-
-    transition:
-        opacity .5s ease,
-        visibility .5s ease;
 }
 
-
-/* LIGHT MODE = NO SCIENTIFIC IMAGES */
-
+/* LIGHT MODE — completely hidden */
 html[data-theme="light"] .section-bg {
-    display: none !important;
     opacity: 0 !important;
     visibility: hidden !important;
+    display: none !important;
 }
 
-
-/* DARK MODE */
-
+/* DARK MODE — visible */
 html[data-theme="dark"] .section-bg {
-    display: block;
-    visibility: visible;
+    display: block !important;
+    opacity: 0.28 !important;
+    visibility: visible !important;
 }
 
-
-/* QUANTUM */
+/* Keep all section content above the image */
+.image-section > *:not(.section-bg) {
+    position: relative;
+    z-index: 2;
+}
+/* Individual scientific backgrounds */
 
 .quantum-section-bg {
-    width: 520px;
-    height: 520px;
-
-    left: -170px;
-    top: 40px;
-
-    transform: rotate(-8deg);
-
-    filter:
-        saturate(.55)
-        contrast(1.15);
+    object-position: center;
 }
-
-html[data-theme="dark"] .quantum-section-bg {
-    opacity: .10;
-}
-
-
-/* GALAXY */
 
 .galaxy-section-bg {
-    width: 650px;
-    height: 520px;
-
-    right: -240px;
-    top: -30px;
-
-    filter:
-        saturate(.45)
-        contrast(1.15);
+    object-position: center;
 }
-
-html[data-theme="dark"] .galaxy-section-bg {
-    opacity: .14;
-}
-
-
-/* SATELLITE */
 
 .satellite-section-bg {
-    width: 650px;
-    height: 520px;
-
-    right: -230px;
-    bottom: -120px;
-
-    filter:
-        saturate(.45)
-        contrast(1.15);
+    object-position: center;
 }
-
-html[data-theme="dark"] .satellite-section-bg {
-    opacity: .11;
-}
-
-
-/* ANTENNA */
 
 .antenna-section-bg {
-    width: 600px;
-    height: 520px;
-
-    left: -240px;
-    bottom: -110px;
-
-    filter:
-        saturate(.45)
-        contrast(1.15);
+    object-position: center;
 }
-
-html[data-theme="dark"] .antenna-section-bg {
-    opacity: .10;
-}
-
-
-/* DARK OVERLAY */
-
-html[data-theme="dark"] .image-section::before {
-    content: "";
-
-    position: absolute;
-    inset: 0;
-
-    z-index: 1;
-
-    pointer-events: none;
-
-    background:
-        linear-gradient(
-            90deg,
-            rgba(3, 5, 6, .96),
-            rgba(3, 5, 6, .78),
-            rgba(3, 5, 6, .92)
-        );
-}
-
-html[data-theme="light"] .image-section::before {
-    display: none;
-}
-
 
 /* =========================================================
    RESEARCH
