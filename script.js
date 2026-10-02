@@ -1,400 +1,277 @@
-/* =========================
-   DARK / LIGHT THEME
-========================= */
+/* =========================================================
+SRIkth.github.io
+JAVASCRIPT
+========================================================= */
+
+/* =========================================================
+THEME TOGGLE
+========================================================= */
 
 const themeToggle =
-    document.getElementById("theme-toggle");
-
-
-function applyTheme(theme) {
-
-    if (theme === "light") {
-
-        document.body.classList.add(
-            "light-theme"
-        );
-
-        if (themeToggle) {
-
-            themeToggle.textContent = "☾";
-
-            themeToggle.setAttribute(
-                "aria-label",
-                "Switch to dark theme"
-            );
-
-            themeToggle.setAttribute(
-                "title",
-                "Switch to dark theme"
-            );
-        }
-
-    } else {
-
-        document.body.classList.remove(
-            "light-theme"
-        );
-
-        if (themeToggle) {
-
-            themeToggle.textContent = "☀";
-
-            themeToggle.setAttribute(
-                "aria-label",
-                "Switch to light theme"
-            );
-
-            themeToggle.setAttribute(
-                "title",
-                "Switch to light theme"
-            );
-        }
-    }
-}
-
-
-/* =========================
-   LOAD SAVED THEME
-========================= */
+document.getElementById("themeToggle");
 
 const savedTheme =
-    localStorage.getItem("theme");
+localStorage.getItem("theme");
 
+if (savedTheme === "light") {
 
-if (savedTheme) {
+```
+document.body.classList.add("light-theme");
 
-    applyTheme(savedTheme);
+themeToggle.textContent = "☀";
+```
 
 } else {
 
-    applyTheme("dark");
+```
+themeToggle.textContent = "☾";
+```
+
 }
 
+themeToggle.addEventListener("click", () => {
 
-/* =========================
-   THEME TOGGLE
-========================= */
-
-if (themeToggle) {
-
-    themeToggle.addEventListener(
-        "click",
-        () => {
-
-            const isLight =
-                document.body.classList.contains(
-                    "light-theme"
-                );
+```
+document.body.classList.toggle("light-theme");
 
 
-            const newTheme =
-                isLight ? "dark" : "light";
+const isLight =
+    document.body.classList.contains("light-theme");
 
 
-            applyTheme(newTheme);
+if (isLight) {
 
+    themeToggle.textContent = "☀";
 
-            localStorage.setItem(
-                "theme",
-                newTheme
-            );
-
-        }
+    localStorage.setItem(
+        "theme",
+        "light"
     );
+
+} else {
+
+    themeToggle.textContent = "☾";
+
+    localStorage.setItem(
+        "theme",
+        "dark"
+    );
+
 }
+```
 
+});
 
-
-/* =========================
-   FOOTER YEAR
-========================= */
+/* =========================================================
+CURRENT YEAR
+========================================================= */
 
 const yearElement =
-    document.getElementById("year");
-
+document.getElementById("year");
 
 if (yearElement) {
 
-    yearElement.textContent =
-        new Date().getFullYear();
+```
+yearElement.textContent =
+    new Date().getFullYear();
+```
 
 }
 
-
-
-/* =========================
-   ACTIVE NAVIGATION
-========================= */
+/* =========================================================
+ACTIVE NAVIGATION
+========================================================= */
 
 const sections =
-    document.querySelectorAll(
-        "section[id]"
-    );
-
+document.querySelectorAll("section[id]");
 
 const navLinks =
-    document.querySelectorAll(
-        "nav a"
-    );
+document.querySelectorAll(".nav-links a");
 
+const observerOptions = {
 
-function updateActiveNavigation() {
+```
+root: null,
 
-    let currentSection = "";
+rootMargin:
+    "-25% 0px -60% 0px",
 
+threshold: 0
+```
 
-    sections.forEach(
-        (section) => {
+};
 
-            const sectionTop =
-                section.offsetTop - 160;
+const sectionObserver =
+new IntersectionObserver(
+(entries) => {
 
+```
+        entries.forEach(entry => {
 
-            if (
-                window.scrollY >=
-                sectionTop
-            ) {
-
-                currentSection =
-                    section.getAttribute(
-                        "id"
-                    );
-
+            if (!entry.isIntersecting) {
+                return;
             }
 
-        }
-    );
+
+            const id =
+                entry.target.getAttribute("id");
 
 
-    navLinks.forEach(
-        (link) => {
+            navLinks.forEach(link => {
 
-            link.classList.remove(
-                "active"
-            );
-
-
-            const href =
-                link.getAttribute(
-                    "href"
-                );
-
-
-            if (
-                href ===
-                `#${currentSection}`
-            ) {
-
-                link.classList.add(
-                    "active"
-                );
-
-            }
-
-        }
-    );
-
-}
-
-
-window.addEventListener(
-    "scroll",
-    updateActiveNavigation,
-    {
-        passive: true
-    }
-);
-
-
-
-/* =========================
-   SMOOTH NAVIGATION
-========================= */
-
-navLinks.forEach(
-    (link) => {
-
-        link.addEventListener(
-            "click",
-            (event) => {
-
-                const targetID =
-                    link.getAttribute(
-                        "href"
-                    );
-
+                link.classList.remove("active");
 
                 if (
-                    !targetID ||
-                    !targetID.startsWith("#")
+                    link.getAttribute("href") ===
+                    `#${id}`
                 ) {
 
-                    return;
+                    link.classList.add("active");
 
                 }
 
+            });
 
-                const target =
-                    document.querySelector(
-                        targetID
-                    );
+        });
+
+    },
+    observerOptions
+);
+```
+
+sections.forEach(section => {
+
+```
+sectionObserver.observe(section);
+```
+
+});
+
+/* =========================================================
+SMOOTH NAVIGATION
+========================================================= */
+
+navLinks.forEach(link => {
+
+```
+link.addEventListener("click", event => {
+
+    const targetId =
+        link.getAttribute("href");
 
 
-                if (!target) {
-
-                    return;
-
-                }
+    if (!targetId.startsWith("#")) {
+        return;
+    }
 
 
-                event.preventDefault();
+    const target =
+        document.querySelector(targetId);
 
 
-                target.scrollIntoView({
+    if (!target) {
+        return;
+    }
 
-                    behavior: "smooth",
 
-                    block: "start"
+    event.preventDefault();
 
-                });
 
+    target.scrollIntoView({
+        behavior: "smooth",
+        block: "start"
+    });
+
+});
+```
+
+});
+
+/* =========================================================
+REVEAL ANIMATION
+========================================================= */
+
+const revealElements =
+document.querySelectorAll(
+".research-card, " +
+".project-card, " +
+".timeline-card, " +
+".skill-group, " +
+".award-item"
+);
+
+revealElements.forEach(element => {
+
+```
+element.style.opacity = "0";
+
+element.style.transform =
+    "translateY(18px)";
+
+element.style.transition =
+    "opacity 0.6s ease, transform 0.6s ease";
+```
+
+});
+
+const revealObserver =
+new IntersectionObserver(
+entries => {
+
+```
+        entries.forEach(entry => {
+
+            if (!entry.isIntersecting) {
+                return;
             }
-        );
 
+
+            entry.target.style.opacity = "1";
+
+            entry.target.style.transform =
+                "translateY(0)";
+
+
+            revealObserver.unobserve(
+                entry.target
+            );
+
+        });
+
+    },
+    {
+        threshold: 0.12
     }
 );
+```
 
+revealElements.forEach(element => {
 
+```
+revealObserver.observe(element);
+```
 
-/* =========================
-   PROJECT LINKS
-========================= */
+});
 
-const projectLinks =
-    document.querySelectorAll(
-        ".project-link"
-    );
+/* =========================================================
+KEYBOARD ACCESSIBILITY
+========================================================= */
 
+document.addEventListener("keydown", event => {
 
-projectLinks.forEach(
-    (link) => {
-
-        link.addEventListener(
-            "click",
-            () => {
-
-                console.log(
-                    "Opening project:",
-                    link.href
-                );
-
-            }
-        );
-
-    }
-);
-
-
-
-/* =========================
-   PAGE LOADING
-========================= */
-
-document.documentElement.classList.add(
-    "page-loading"
-);
-
-
-window.addEventListener(
-    "load",
-    () => {
-
-        document.documentElement.classList.remove(
-            "page-loading"
-        );
-
-    }
-);
-
-
-
-/* =========================
-   SCROLL REVEAL
-========================= */
-
-const revealItems =
-    document.querySelectorAll(
-
-        ".research-item, " +
-        ".timeline-item, " +
-        ".project, " +
-        ".skill-group, " +
-        ".simple-list > div"
-
-    );
-
-
+```
 if (
-    "IntersectionObserver"
-    in window
+    event.key === "t" &&
+    !event.ctrlKey &&
+    !event.altKey &&
+    !event.metaKey &&
+    document.activeElement.tagName !== "INPUT" &&
+    document.activeElement.tagName !== "TEXTAREA"
 ) {
 
-    const observer =
-        new IntersectionObserver(
-
-            (entries) => {
-
-                entries.forEach(
-                    (entry) => {
-
-                        if (
-                            entry.isIntersecting
-                        ) {
-
-                            entry.target.classList.add(
-                                "cyber-visible"
-                            );
-
-
-                            observer.unobserve(
-                                entry.target
-                            );
-
-                        }
-
-                    }
-                );
-
-            },
-
-            {
-                threshold: 0.08
-            }
-
-        );
-
-
-    revealItems.forEach(
-        (item) => {
-
-            item.classList.add(
-                "cyber-reveal"
-            );
-
-
-            observer.observe(
-                item
-            );
-
-        }
-    );
+    themeToggle.click();
 
 }
+```
 
-
-
-/* =========================
-   INITIAL NAVIGATION
-========================= */
-
-updateActiveNavigation();
+});
