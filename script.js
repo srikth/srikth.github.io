@@ -1,36 +1,62 @@
 /* =========================================================
+   SRikANTH SHANMUGAM
+   PORTFOLIO JAVASCRIPT
+========================================================= */
+
+
+/* =========================================================
    THEME SYSTEM
 ========================================================= */
 
 const html = document.documentElement;
 
-const themeToggle =
-    document.getElementById("themeToggle");
+const themeToggle = document.getElementById("themeToggle");
+const themeIcon = document.getElementById("themeIcon");
+const themeText = document.getElementById("themeText");
 
-const themeIcon =
-    document.getElementById("themeIcon");
+const THEME_KEY = "srikanth-theme";
 
 
-function getStoredTheme() {
+function getSavedTheme() {
 
     try {
-        return localStorage.getItem("portfolio-theme");
+
+        const saved =
+            localStorage.getItem(THEME_KEY);
+
+        if (
+            saved === "dark" ||
+            saved === "light"
+        ) {
+            return saved;
+        }
+
+        return "light";
+
     } catch (error) {
-        return null;
+
+        return "light";
+
     }
+
 }
 
 
 function saveTheme(theme) {
 
     try {
+
         localStorage.setItem(
-            "portfolio-theme",
+            THEME_KEY,
             theme
         );
+
     } catch (error) {
-        /* localStorage unavailable */
+
+        /* Storage unavailable */
+
     }
+
 }
 
 
@@ -43,73 +69,91 @@ function setTheme(theme) {
 
     saveTheme(theme);
 
+
     if (theme === "dark") {
 
-        themeIcon.textContent = "☀";
+        if (themeIcon) {
+            themeIcon.textContent = "☀";
+        }
 
-        themeToggle.setAttribute(
-            "aria-label",
-            "Switch to light theme"
-        );
+        if (themeText) {
+            themeText.textContent = "LIGHT";
+        }
 
-        themeToggle.setAttribute(
-            "title",
-            "Light professional theme"
-        );
+        if (themeToggle) {
+
+            themeToggle.setAttribute(
+                "aria-label",
+                "Switch to light theme"
+            );
+
+            themeToggle.setAttribute(
+                "title",
+                "Switch to professional light theme"
+            );
+
+        }
 
     } else {
 
-        themeIcon.textContent = "☾";
-
-        themeToggle.setAttribute(
-            "aria-label",
-            "Switch to dark theme"
-        );
-
-        themeToggle.setAttribute(
-            "title",
-            "Dark technical theme"
-        );
-    }
-}
-
-
-/*
-   ALWAYS START LIGHT unless
-   the user previously selected dark.
-*/
-
-const savedTheme = getStoredTheme();
-
-if (savedTheme === "dark") {
-
-    setTheme("dark");
-
-} else {
-
-    setTheme("light");
-}
-
-
-/* toggle */
-
-themeToggle.addEventListener(
-    "click",
-    () => {
-
-        const current =
-            html.getAttribute("data-theme");
-
-        if (current === "dark") {
-
-            setTheme("light");
-
-        } else {
-
-            setTheme("dark");
+        if (themeIcon) {
+            themeIcon.textContent = "☾";
         }
+
+        if (themeText) {
+            themeText.textContent = "DARK";
+        }
+
+        if (themeToggle) {
+
+            themeToggle.setAttribute(
+                "aria-label",
+                "Switch to dark theme"
+            );
+
+            themeToggle.setAttribute(
+                "title",
+                "Switch to technical dark theme"
+            );
+
+        }
+
     }
+
+}
+
+
+/* Load saved theme */
+
+setTheme(
+    getSavedTheme()
 );
+
+
+/* Theme button */
+
+if (themeToggle) {
+
+    themeToggle.addEventListener(
+        "click",
+        () => {
+
+            const currentTheme =
+                html.getAttribute(
+                    "data-theme"
+                );
+
+            const nextTheme =
+                currentTheme === "dark"
+                    ? "light"
+                    : "dark";
+
+            setTheme(nextTheme);
+
+        }
+    );
+
+}
 
 
 /* =========================================================
@@ -117,44 +161,72 @@ themeToggle.addEventListener(
 ========================================================= */
 
 const revealElements =
-    document.querySelectorAll(".reveal");
-
-const revealObserver =
-    new IntersectionObserver(
-        (entries, observer) => {
-
-            entries.forEach((entry) => {
-
-                if (!entry.isIntersecting) {
-                    return;
-                }
-
-                entry.target.classList.add(
-                    "revealed"
-                );
-
-                observer.unobserve(
-                    entry.target
-                );
-
-            });
-
-        },
-        {
-            threshold: 0.12
-        }
+    document.querySelectorAll(
+        ".reveal"
     );
 
 
-revealElements.forEach((element) => {
+if ("IntersectionObserver" in window) {
 
-    revealObserver.observe(element);
+    const revealObserver =
+        new IntersectionObserver(
 
-});
+            (entries, observer) => {
+
+                entries.forEach(
+                    entry => {
+
+                        if (!entry.isIntersecting) {
+                            return;
+                        }
+
+                        entry.target.classList.add(
+                            "visible"
+                        );
+
+                        observer.unobserve(
+                            entry.target
+                        );
+
+                    }
+                );
+
+            },
+
+            {
+                threshold: 0.12
+            }
+
+        );
+
+
+    revealElements.forEach(
+        element => {
+
+            revealObserver.observe(
+                element
+            );
+
+        }
+    );
+
+} else {
+
+    revealElements.forEach(
+        element => {
+
+            element.classList.add(
+                "visible"
+            );
+
+        }
+    );
+
+}
 
 
 /* =========================================================
-   ACTIVE NAV
+   ACTIVE NAVIGATION
 ========================================================= */
 
 const sections =
@@ -168,68 +240,94 @@ const navLinks =
     );
 
 
-const navObserver =
-    new IntersectionObserver(
-        (entries) => {
+if (
+    "IntersectionObserver" in window &&
+    sections.length &&
+    navLinks.length
+) {
 
-            entries.forEach((entry) => {
+    const sectionObserver =
+        new IntersectionObserver(
 
-                if (!entry.isIntersecting) {
-                    return;
-                }
+            entries => {
 
-                const id =
-                    entry.target.id;
+                entries.forEach(
+                    entry => {
 
-                navLinks.forEach((link) => {
+                        if (!entry.isIntersecting) {
+                            return;
+                        }
 
-                    link.classList.toggle(
-                        "active",
-                        link.getAttribute("href")
-                        === `#${id}`
-                    );
+                        const currentId =
+                            entry.target.id;
 
-                });
 
-            });
+                        navLinks.forEach(
+                            link => {
 
-        },
-        {
-            rootMargin:
-                "-40% 0px -50% 0px"
+                                const href =
+                                    link.getAttribute(
+                                        "href"
+                                    );
+
+                                link.classList.toggle(
+                                    "active",
+                                    href ===
+                                    `#${currentId}`
+                                );
+
+                            }
+                        );
+
+                    }
+                );
+
+            },
+
+            {
+                rootMargin:
+                    "-30% 0px -55% 0px",
+                threshold: 0
+            }
+
+        );
+
+
+    sections.forEach(
+        section => {
+
+            sectionObserver.observe(
+                section
+            );
+
         }
     );
 
-
-sections.forEach((section) => {
-
-    navObserver.observe(section);
-
-});
+}
 
 
 /* =========================================================
-   SUBTLE MOUSE GESTURE
+   CARD INTERACTION
 ========================================================= */
 
-const canHover =
-    window.matchMedia(
-        "(hover: hover)"
-    ).matches;
+const interactiveCards =
+    document.querySelectorAll(
+        ".interactive-card"
+    );
 
 
-if (canHover) {
-
-    const cards =
-        document.querySelectorAll(
-            ".interactive-card"
-        );
-
-    cards.forEach((card) => {
+interactiveCards.forEach(
+    card => {
 
         card.addEventListener(
-            "mousemove",
-            (event) => {
+            "pointermove",
+            event => {
+
+                if (
+                    window.innerWidth < 900
+                ) {
+                    return;
+                }
 
                 const rect =
                     card.getBoundingClientRect();
@@ -242,32 +340,27 @@ if (canHover) {
                     event.clientY -
                     rect.top;
 
-                const centerX =
-                    rect.width / 2;
-
-                const centerY =
-                    rect.height / 2;
-
                 const rotateX =
-                    ((centerY - y) /
-                        centerY) * 1.5;
+                    ((y / rect.height) - 0.5) *
+                    -3;
 
                 const rotateY =
-                    ((x - centerX) /
-                        centerX) * 1.5;
+                    ((x / rect.width) - 0.5) *
+                    3;
+
 
                 card.style.transform =
                     `perspective(900px)
                      rotateX(${rotateX}deg)
                      rotateY(${rotateY}deg)
-                     translateY(-3px)`;
+                     translateY(-4px)`;
 
             }
         );
 
 
         card.addEventListener(
-            "mouseleave",
+            "pointerleave",
             () => {
 
                 card.style.transform = "";
@@ -275,41 +368,116 @@ if (canHover) {
             }
         );
 
-    });
-
-}
+    }
+);
 
 
 /* =========================================================
    KEYBOARD THEME SHORTCUT
-   T = THEME
+   Press T to toggle theme
 ========================================================= */
 
 document.addEventListener(
     "keydown",
-    (event) => {
+    event => {
+
+        const tag =
+            document.activeElement?.tagName;
 
         if (
-            event.key.toLowerCase() !== "t"
+            tag === "INPUT" ||
+            tag === "TEXTAREA" ||
+            tag === "SELECT"
         ) {
             return;
         }
 
-        const active =
-            document.activeElement;
-
         if (
-            active &&
-            (
-                active.tagName === "INPUT" ||
-                active.tagName === "TEXTAREA" ||
-                active.tagName === "SELECT"
-            )
+            event.key.toLowerCase() === "t"
         ) {
-            return;
+
+            const currentTheme =
+                html.getAttribute(
+                    "data-theme"
+                );
+
+            setTheme(
+                currentTheme === "dark"
+                    ? "light"
+                    : "dark"
+            );
+
         }
 
-        themeToggle.click();
+    }
+);
+
+
+/* =========================================================
+   SMOOTH INTERNAL LINKS
+========================================================= */
+
+document.querySelectorAll(
+    'a[href^="#"]'
+).forEach(
+    link => {
+
+        link.addEventListener(
+            "click",
+            event => {
+
+                const targetId =
+                    link.getAttribute(
+                        "href"
+                    );
+
+                if (
+                    !targetId ||
+                    targetId === "#"
+                ) {
+                    return;
+                }
+
+                const target =
+                    document.querySelector(
+                        targetId
+                    );
+
+                if (!target) {
+                    return;
+                }
+
+                event.preventDefault();
+
+                target.scrollIntoView({
+                    behavior: "smooth",
+                    block: "start"
+                });
+
+            }
+        );
+
+    }
+);
+
+
+/* =========================================================
+   IMAGE ERROR HANDLING
+========================================================= */
+
+document.querySelectorAll(
+    "img"
+).forEach(
+    image => {
+
+        image.addEventListener(
+            "error",
+            () => {
+
+                image.style.opacity = "0";
+
+            }
+        );
 
     }
 );
