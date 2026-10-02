@@ -1,100 +1,115 @@
 /* =========================================================
-   THEME
+   THEME SYSTEM
 ========================================================= */
 
-const body = document.body;
-const themeToggle = document.getElementById("themeToggle");
-const themeIcon = document.getElementById("themeIcon");
+const html = document.documentElement;
 
-const savedTheme = localStorage.getItem("portfolio-theme");
+const themeToggle =
+    document.getElementById("themeToggle");
 
-if (savedTheme === "light") {
-    body.classList.add("light-theme");
+const themeIcon =
+    document.getElementById("themeIcon");
+
+
+function getStoredTheme() {
+
+    try {
+        return localStorage.getItem("portfolio-theme");
+    } catch (error) {
+        return null;
+    }
 }
 
-function updateThemeIcon() {
-    if (body.classList.contains("light-theme")) {
-        themeIcon.textContent = "☾";
-        themeToggle.setAttribute(
-            "aria-label",
-            "Switch to dark technical theme"
+
+function saveTheme(theme) {
+
+    try {
+        localStorage.setItem(
+            "portfolio-theme",
+            theme
         );
-        themeToggle.setAttribute(
-            "title",
-            "Dark technical theme"
-        );
-    } else {
+    } catch (error) {
+        /* localStorage unavailable */
+    }
+}
+
+
+function setTheme(theme) {
+
+    html.setAttribute(
+        "data-theme",
+        theme
+    );
+
+    saveTheme(theme);
+
+    if (theme === "dark") {
+
         themeIcon.textContent = "☀";
+
         themeToggle.setAttribute(
             "aria-label",
-            "Switch to light professional theme"
+            "Switch to light theme"
         );
+
         themeToggle.setAttribute(
             "title",
             "Light professional theme"
         );
+
+    } else {
+
+        themeIcon.textContent = "☾";
+
+        themeToggle.setAttribute(
+            "aria-label",
+            "Switch to dark theme"
+        );
+
+        themeToggle.setAttribute(
+            "title",
+            "Dark technical theme"
+        );
     }
 }
 
-updateThemeIcon();
 
-themeToggle.addEventListener("click", () => {
+/*
+   ALWAYS START LIGHT unless
+   the user previously selected dark.
+*/
 
-    body.classList.toggle("light-theme");
+const savedTheme = getStoredTheme();
 
-    const theme =
-        body.classList.contains("light-theme")
-            ? "light"
-            : "dark";
+if (savedTheme === "dark") {
 
-    localStorage.setItem("portfolio-theme", theme);
+    setTheme("dark");
 
-    updateThemeIcon();
-});
+} else {
 
-
-/* =========================================================
-   MOUSE FOLLOWING LIGHT
-========================================================= */
-
-const isTouchDevice =
-    window.matchMedia("(hover: none)").matches;
-
-if (!isTouchDevice) {
-
-    let mouseX = window.innerWidth / 2;
-    let mouseY = window.innerHeight / 2;
-
-    let currentX = mouseX;
-    let currentY = mouseY;
-
-    window.addEventListener("mousemove", (event) => {
-
-        mouseX = event.clientX;
-        mouseY = event.clientY;
-
-    });
-
-    function animateGlow() {
-
-        currentX += (mouseX - currentX) * 0.08;
-        currentY += (mouseY - currentY) * 0.08;
-
-        document.documentElement.style.setProperty(
-            "--mouse-x",
-            `${currentX}px`
-        );
-
-        document.documentElement.style.setProperty(
-            "--mouse-y",
-            `${currentY}px`
-        );
-
-        requestAnimationFrame(animateGlow);
-    }
-
-    animateGlow();
+    setTheme("light");
 }
+
+
+/* toggle */
+
+themeToggle.addEventListener(
+    "click",
+    () => {
+
+        const current =
+            html.getAttribute("data-theme");
+
+        if (current === "dark") {
+
+            setTheme("light");
+
+        } else {
+
+            setTheme("dark");
+        }
+    }
+);
 
 
 /* =========================================================
@@ -114,9 +129,13 @@ const revealObserver =
                     return;
                 }
 
-                entry.target.classList.add("revealed");
+                entry.target.classList.add(
+                    "revealed"
+                );
 
-                observer.unobserve(entry.target);
+                observer.unobserve(
+                    entry.target
+                );
 
             });
 
@@ -126,22 +145,30 @@ const revealObserver =
         }
     );
 
+
 revealElements.forEach((element) => {
+
     revealObserver.observe(element);
+
 });
 
 
 /* =========================================================
-   ACTIVE NAVIGATION
+   ACTIVE NAV
 ========================================================= */
 
 const sections =
-    document.querySelectorAll("main section[id]");
+    document.querySelectorAll(
+        "main section[id]"
+    );
 
 const navLinks =
-    document.querySelectorAll(".nav-links a");
+    document.querySelectorAll(
+        ".nav-links a"
+    );
 
-const sectionObserver =
+
+const navObserver =
     new IntersectionObserver(
         (entries) => {
 
@@ -151,14 +178,15 @@ const sectionObserver =
                     return;
                 }
 
-                const currentId =
-                    entry.target.getAttribute("id");
+                const id =
+                    entry.target.id;
 
                 navLinks.forEach((link) => {
 
                     link.classList.toggle(
                         "active",
-                        link.getAttribute("href") === `#${currentId}`
+                        link.getAttribute("href")
+                        === `#${id}`
                     );
 
                 });
@@ -167,104 +195,85 @@ const sectionObserver =
 
         },
         {
-            rootMargin: "-35% 0px -55% 0px"
+            rootMargin:
+                "-40% 0px -50% 0px"
         }
     );
 
+
 sections.forEach((section) => {
-    sectionObserver.observe(section);
-});
 
-
-/* =========================================================
-   SMOOTH NAVIGATION
-========================================================= */
-
-navLinks.forEach((link) => {
-
-    link.addEventListener("click", (event) => {
-
-        const targetId =
-            link.getAttribute("href");
-
-        const target =
-            document.querySelector(targetId);
-
-        if (!target) {
-            return;
-        }
-
-        event.preventDefault();
-
-        target.scrollIntoView({
-            behavior: "smooth",
-            block: "start"
-        });
-
-    });
+    navObserver.observe(section);
 
 });
 
 
 /* =========================================================
-   SUBTLE 3D CARD GESTURE
+   SUBTLE MOUSE GESTURE
 ========================================================= */
 
-if (!isTouchDevice) {
+const canHover =
+    window.matchMedia(
+        "(hover: hover)"
+    ).matches;
+
+
+if (canHover) {
 
     const cards =
-        document.querySelectorAll(".interactive-card");
+        document.querySelectorAll(
+            ".interactive-card"
+        );
 
     cards.forEach((card) => {
 
-        card.addEventListener("mousemove", (event) => {
+        card.addEventListener(
+            "mousemove",
+            (event) => {
 
-            const rect =
-                card.getBoundingClientRect();
+                const rect =
+                    card.getBoundingClientRect();
 
-            const x =
-                event.clientX - rect.left;
+                const x =
+                    event.clientX -
+                    rect.left;
 
-            const y =
-                event.clientY - rect.top;
+                const y =
+                    event.clientY -
+                    rect.top;
 
-            const centerX =
-                rect.width / 2;
+                const centerX =
+                    rect.width / 2;
 
-            const centerY =
-                rect.height / 2;
+                const centerY =
+                    rect.height / 2;
 
-            const rotateY =
-                ((x - centerX) / centerX) * 2.2;
+                const rotateX =
+                    ((centerY - y) /
+                        centerY) * 1.5;
 
-            const rotateX =
-                ((centerY - y) / centerY) * 2.2;
+                const rotateY =
+                    ((x - centerX) /
+                        centerX) * 1.5;
 
-            card.style.setProperty(
-                "--rx",
-                `${rotateX}deg`
-            );
+                card.style.transform =
+                    `perspective(900px)
+                     rotateX(${rotateX}deg)
+                     rotateY(${rotateY}deg)
+                     translateY(-3px)`;
 
-            card.style.setProperty(
-                "--ry",
-                `${rotateY}deg`
-            );
+            }
+        );
 
-        });
 
-        card.addEventListener("mouseleave", () => {
+        card.addEventListener(
+            "mouseleave",
+            () => {
 
-            card.style.setProperty(
-                "--rx",
-                "0deg"
-            );
+                card.style.transform = "";
 
-            card.style.setProperty(
-                "--ry",
-                "0deg"
-            );
-
-        });
+            }
+        );
 
     });
 
@@ -272,43 +281,35 @@ if (!isTouchDevice) {
 
 
 /* =========================================================
-   KEYBOARD SHORTCUT
-   T = SWITCH THEME
+   KEYBOARD THEME SHORTCUT
+   T = THEME
 ========================================================= */
 
-document.addEventListener("keydown", (event) => {
+document.addEventListener(
+    "keydown",
+    (event) => {
 
-    const tag =
-        document.activeElement.tagName;
+        if (
+            event.key.toLowerCase() !== "t"
+        ) {
+            return;
+        }
 
-    if (
-        tag === "INPUT" ||
-        tag === "TEXTAREA" ||
-        tag === "SELECT"
-    ) {
-        return;
-    }
+        const active =
+            document.activeElement;
 
-    if (event.key.toLowerCase() === "t") {
+        if (
+            active &&
+            (
+                active.tagName === "INPUT" ||
+                active.tagName === "TEXTAREA" ||
+                active.tagName === "SELECT"
+            )
+        ) {
+            return;
+        }
 
         themeToggle.click();
 
     }
-
-});
-
-
-/* =========================================================
-   EXTERNAL LINKS
-========================================================= */
-
-document.querySelectorAll(
-    'a[target="_blank"]'
-).forEach((link) => {
-
-    link.setAttribute(
-        "rel",
-        "noopener noreferrer"
-    );
-
-});
+);
