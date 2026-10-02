@@ -1,277 +1,314 @@
 /* =========================================================
-SRIkth.github.io
-JAVASCRIPT
+   THEME
 ========================================================= */
 
-/* =========================================================
-THEME TOGGLE
-========================================================= */
+const body = document.body;
+const themeToggle = document.getElementById("themeToggle");
+const themeIcon = document.getElementById("themeIcon");
 
-const themeToggle =
-document.getElementById("themeToggle");
-
-const savedTheme =
-localStorage.getItem("theme");
+const savedTheme = localStorage.getItem("portfolio-theme");
 
 if (savedTheme === "light") {
-
-```
-document.body.classList.add("light-theme");
-
-themeToggle.textContent = "☀";
-```
-
-} else {
-
-```
-themeToggle.textContent = "☾";
-```
-
+    body.classList.add("light-theme");
 }
+
+function updateThemeIcon() {
+    if (body.classList.contains("light-theme")) {
+        themeIcon.textContent = "☾";
+        themeToggle.setAttribute(
+            "aria-label",
+            "Switch to dark technical theme"
+        );
+        themeToggle.setAttribute(
+            "title",
+            "Dark technical theme"
+        );
+    } else {
+        themeIcon.textContent = "☀";
+        themeToggle.setAttribute(
+            "aria-label",
+            "Switch to light professional theme"
+        );
+        themeToggle.setAttribute(
+            "title",
+            "Light professional theme"
+        );
+    }
+}
+
+updateThemeIcon();
 
 themeToggle.addEventListener("click", () => {
 
-```
-document.body.classList.toggle("light-theme");
+    body.classList.toggle("light-theme");
 
+    const theme =
+        body.classList.contains("light-theme")
+            ? "light"
+            : "dark";
 
-const isLight =
-    document.body.classList.contains("light-theme");
+    localStorage.setItem("portfolio-theme", theme);
 
-
-if (isLight) {
-
-    themeToggle.textContent = "☀";
-
-    localStorage.setItem(
-        "theme",
-        "light"
-    );
-
-} else {
-
-    themeToggle.textContent = "☾";
-
-    localStorage.setItem(
-        "theme",
-        "dark"
-    );
-
-}
-```
-
+    updateThemeIcon();
 });
 
-/* =========================================================
-CURRENT YEAR
-========================================================= */
-
-const yearElement =
-document.getElementById("year");
-
-if (yearElement) {
-
-```
-yearElement.textContent =
-    new Date().getFullYear();
-```
-
-}
 
 /* =========================================================
-ACTIVE NAVIGATION
+   MOUSE FOLLOWING LIGHT
 ========================================================= */
 
-const sections =
-document.querySelectorAll("section[id]");
+const isTouchDevice =
+    window.matchMedia("(hover: none)").matches;
 
-const navLinks =
-document.querySelectorAll(".nav-links a");
+if (!isTouchDevice) {
 
-const observerOptions = {
+    let mouseX = window.innerWidth / 2;
+    let mouseY = window.innerHeight / 2;
 
-```
-root: null,
+    let currentX = mouseX;
+    let currentY = mouseY;
 
-rootMargin:
-    "-25% 0px -60% 0px",
+    window.addEventListener("mousemove", (event) => {
 
-threshold: 0
-```
+        mouseX = event.clientX;
+        mouseY = event.clientY;
 
-};
-
-const sectionObserver =
-new IntersectionObserver(
-(entries) => {
-
-```
-        entries.forEach(entry => {
-
-            if (!entry.isIntersecting) {
-                return;
-            }
-
-
-            const id =
-                entry.target.getAttribute("id");
-
-
-            navLinks.forEach(link => {
-
-                link.classList.remove("active");
-
-                if (
-                    link.getAttribute("href") ===
-                    `#${id}`
-                ) {
-
-                    link.classList.add("active");
-
-                }
-
-            });
-
-        });
-
-    },
-    observerOptions
-);
-```
-
-sections.forEach(section => {
-
-```
-sectionObserver.observe(section);
-```
-
-});
-
-/* =========================================================
-SMOOTH NAVIGATION
-========================================================= */
-
-navLinks.forEach(link => {
-
-```
-link.addEventListener("click", event => {
-
-    const targetId =
-        link.getAttribute("href");
-
-
-    if (!targetId.startsWith("#")) {
-        return;
-    }
-
-
-    const target =
-        document.querySelector(targetId);
-
-
-    if (!target) {
-        return;
-    }
-
-
-    event.preventDefault();
-
-
-    target.scrollIntoView({
-        behavior: "smooth",
-        block: "start"
     });
 
-});
-```
+    function animateGlow() {
 
-});
+        currentX += (mouseX - currentX) * 0.08;
+        currentY += (mouseY - currentY) * 0.08;
+
+        document.documentElement.style.setProperty(
+            "--mouse-x",
+            `${currentX}px`
+        );
+
+        document.documentElement.style.setProperty(
+            "--mouse-y",
+            `${currentY}px`
+        );
+
+        requestAnimationFrame(animateGlow);
+    }
+
+    animateGlow();
+}
+
 
 /* =========================================================
-REVEAL ANIMATION
+   SCROLL REVEAL
 ========================================================= */
 
 const revealElements =
-document.querySelectorAll(
-".research-card, " +
-".project-card, " +
-".timeline-card, " +
-".skill-group, " +
-".award-item"
-);
+    document.querySelectorAll(".reveal");
 
-revealElements.forEach(element => {
+const revealObserver =
+    new IntersectionObserver(
+        (entries, observer) => {
 
-```
-element.style.opacity = "0";
+            entries.forEach((entry) => {
 
-element.style.transform =
-    "translateY(18px)";
+                if (!entry.isIntersecting) {
+                    return;
+                }
 
-element.style.transition =
-    "opacity 0.6s ease, transform 0.6s ease";
-```
+                entry.target.classList.add("revealed");
+
+                observer.unobserve(entry.target);
+
+            });
+
+        },
+        {
+            threshold: 0.12
+        }
+    );
+
+revealElements.forEach((element) => {
+    revealObserver.observe(element);
+});
+
+
+/* =========================================================
+   ACTIVE NAVIGATION
+========================================================= */
+
+const sections =
+    document.querySelectorAll("main section[id]");
+
+const navLinks =
+    document.querySelectorAll(".nav-links a");
+
+const sectionObserver =
+    new IntersectionObserver(
+        (entries) => {
+
+            entries.forEach((entry) => {
+
+                if (!entry.isIntersecting) {
+                    return;
+                }
+
+                const currentId =
+                    entry.target.getAttribute("id");
+
+                navLinks.forEach((link) => {
+
+                    link.classList.toggle(
+                        "active",
+                        link.getAttribute("href") === `#${currentId}`
+                    );
+
+                });
+
+            });
+
+        },
+        {
+            rootMargin: "-35% 0px -55% 0px"
+        }
+    );
+
+sections.forEach((section) => {
+    sectionObserver.observe(section);
+});
+
+
+/* =========================================================
+   SMOOTH NAVIGATION
+========================================================= */
+
+navLinks.forEach((link) => {
+
+    link.addEventListener("click", (event) => {
+
+        const targetId =
+            link.getAttribute("href");
+
+        const target =
+            document.querySelector(targetId);
+
+        if (!target) {
+            return;
+        }
+
+        event.preventDefault();
+
+        target.scrollIntoView({
+            behavior: "smooth",
+            block: "start"
+        });
+
+    });
 
 });
 
-const revealObserver =
-new IntersectionObserver(
-entries => {
 
-```
-        entries.forEach(entry => {
+/* =========================================================
+   SUBTLE 3D CARD GESTURE
+========================================================= */
 
-            if (!entry.isIntersecting) {
-                return;
-            }
+if (!isTouchDevice) {
 
+    const cards =
+        document.querySelectorAll(".interactive-card");
 
-            entry.target.style.opacity = "1";
+    cards.forEach((card) => {
 
-            entry.target.style.transform =
-                "translateY(0)";
+        card.addEventListener("mousemove", (event) => {
 
+            const rect =
+                card.getBoundingClientRect();
 
-            revealObserver.unobserve(
-                entry.target
+            const x =
+                event.clientX - rect.left;
+
+            const y =
+                event.clientY - rect.top;
+
+            const centerX =
+                rect.width / 2;
+
+            const centerY =
+                rect.height / 2;
+
+            const rotateY =
+                ((x - centerX) / centerX) * 2.2;
+
+            const rotateX =
+                ((centerY - y) / centerY) * 2.2;
+
+            card.style.setProperty(
+                "--rx",
+                `${rotateX}deg`
+            );
+
+            card.style.setProperty(
+                "--ry",
+                `${rotateY}deg`
             );
 
         });
 
-    },
-    {
-        threshold: 0.12
+        card.addEventListener("mouseleave", () => {
+
+            card.style.setProperty(
+                "--rx",
+                "0deg"
+            );
+
+            card.style.setProperty(
+                "--ry",
+                "0deg"
+            );
+
+        });
+
+    });
+
+}
+
+
+/* =========================================================
+   KEYBOARD SHORTCUT
+   T = SWITCH THEME
+========================================================= */
+
+document.addEventListener("keydown", (event) => {
+
+    const tag =
+        document.activeElement.tagName;
+
+    if (
+        tag === "INPUT" ||
+        tag === "TEXTAREA" ||
+        tag === "SELECT"
+    ) {
+        return;
     }
-);
-```
 
-revealElements.forEach(element => {
+    if (event.key.toLowerCase() === "t") {
 
-```
-revealObserver.observe(element);
-```
+        themeToggle.click();
+
+    }
 
 });
 
+
 /* =========================================================
-KEYBOARD ACCESSIBILITY
+   EXTERNAL LINKS
 ========================================================= */
 
-document.addEventListener("keydown", event => {
+document.querySelectorAll(
+    'a[target="_blank"]'
+).forEach((link) => {
 
-```
-if (
-    event.key === "t" &&
-    !event.ctrlKey &&
-    !event.altKey &&
-    !event.metaKey &&
-    document.activeElement.tagName !== "INPUT" &&
-    document.activeElement.tagName !== "TEXTAREA"
-) {
-
-    themeToggle.click();
-
-}
-```
+    link.setAttribute(
+        "rel",
+        "noopener noreferrer"
+    );
 
 });
