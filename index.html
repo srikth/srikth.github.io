@@ -1,5 +1,6 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" data-theme="light">
+   
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -27,15 +28,15 @@
 <!-- =========================
      BACKGROUND EFFECTS
 ========================= -->
-
-<div class="space-background" aria-hidden="true">
-    <img class="space-image galaxy-bg" src="galaxy.png" alt="">
-    <img class="space-image quantum-bg" src="quantum.png" alt="">
-    <img class="space-image satellite-bg" src="satelite.png" alt="">
-    <img class="space-image antenna-bg" src="antenna.png" alt="">
-</div>
-
-<div class="cursor-glow" aria-hidden="true"></div>
+<button
+    id="themeToggle"
+    class="theme-toggle"
+    type="button"
+    aria-label="Switch to dark theme"
+    title="Switch theme"
+>
+    <span id="themeIcon">☾</span>
+</button>
 
 <!-- =========================
      NAVIGATION
@@ -235,7 +236,9 @@
      RESEARCH
 ========================= -->
 
-<section id="research" class="section research-section">
+<section id="research" class="section research-section image-section">
+    <img class="section-bg quantum-section-bg" src="quantum.png" alt="">
+    <img class="section-bg galaxy-section-bg" src="galaxy.png" alt="">
 
     <div class="section-heading reveal">
         <p class="eyebrow">RESEARCH INTERESTS</p>
@@ -343,7 +346,8 @@
      EXPERIENCE
 ========================= -->
 
-<section id="experience" class="section">
+<section id="education" class="section image-section">
+    <img class="section-bg satellite-section-bg" src="satelite.png" alt="">
 
     <div class="section-heading reveal">
         <p class="eyebrow">EXPERIENCE</p>
@@ -767,7 +771,8 @@
      AWARDS
 ========================= -->
 
-<section id="awards" class="section">
+<section id="awards" class="section image-section">
+    <img class="section-bg antenna-section-bg" src="antenna.png" alt="">
 
     <div class="section-heading reveal">
         <p class="eyebrow">AWARDS & RECOGNITION</p>
